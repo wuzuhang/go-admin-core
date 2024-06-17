@@ -51,7 +51,16 @@ func PageOK(c *gin.Context, result interface{}, count int, pageIndex int, pageSi
 	res.PageSize = pageSize
 	OK(c, res, msg)
 }
-
+// PageOK 分页数据处理
+func MessagePageOK(c *gin.Context, result interface{}, count int, pageIndex int, pageSize int, extraData map[string]interface{}, msg string) {
+	var res messagepage
+	res.List = result
+	res.Count = count
+	res.PageIndex = pageIndex
+	res.PageSize = pageSize
+	res.ExtraData = extraData
+	OK(c, res, msg)
+}
 // Custum 兼容函数
 func Custum(c *gin.Context, data gin.H) {
 	data["requestId"] = pkg.GenerateMsgIDFromContext(c)
